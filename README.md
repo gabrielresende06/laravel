@@ -63,3 +63,31 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 # DockerHub
 
 https://hub.docker.com/r/gabriel06/laravel
+https://hub.docker.com/r/gabriel06/codeeducation
+
+# Observação
+
+Ao utilizar a imagem do Nginx 1.19
+é possível utilizar o suporte para variáveis
+de ambiente nessa versão, não necessitando a utilização 
+do dockerize para está finalidade.
+
+Para utilizar esse recurso basta adicionar no docker-compose.yml
+ 
+    volumes:
+       - ./templates:/etc/nginx/templates
+    environment:
+       - NGINX_HOST=foobar.com
+       - NGINX_PORT=80
+    
+Por padrão o que está na pasta /etc/nginx/templates é lido
+executado e colocado no diretório em /etc/nginx/conf.d 
+então se tiver um arquivo em templates/default.conf.template, por exemplo,
+que contenha as variavéis de referencias como:
+
+     listen       ${NGINX_PORT};
+
+
+será substituido em /etc/nginx/conf.d/default.conf como:
+
+     listen       80;

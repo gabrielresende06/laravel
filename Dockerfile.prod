@@ -17,7 +17,6 @@ RUN composer install && \
         chmod -R 775 storage
 
 RUN ln -s public html
-RUN npm install
 
 EXPOSE 9000
 ENTRYPOINT ["php-fpm"]
